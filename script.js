@@ -1,11 +1,10 @@
 var timeEl = document.querySelector(".time");
 var mainEl = document.getElementById("main");
 var mainQuest = document.getElementById("questionBox");
-//var a1Btn = document.getElementById("1");
 var ansChoice = "";
 var questionNum = 0;
 let arrObj = JSON.parse(localStorage.getItem('playerScore')) || [];
-
+let scoreReport="";
 
 // Question objects
 var q1 = { tex: "Inside which HTML element do we put the JavaScript?", ans1: "<scripting>", ans2: "<javascript>", ans3: "<script>", correct: "3" };
@@ -79,26 +78,15 @@ function storeScore(myScore) {
         localStorage.setItem('playerScore', JSON.stringify(arrObj));
     }
 }
-    /*
-    function displayScores(){
-        var max1=100;
-      
-        for(var i =0; i<arrObj.length;i++){
-            if(arrObj[i].score<max1){
-                max1=arrObj[i].score;
-                
-                max1init=arrObj.playerInit;
+
+function displayScores(){
+    for(var i =0; i<5;i++){
+        scoreReport=scoreReport + "\n" + localStorage.getItem(playerScore[i]);
+    };
     
-            }
-        }
-        document.getElementById("scores").innerText(max1init + "  " + max1);
-    }
-    
-            /*
-            var newcontent = document.createElement('div');
-            newcontent.innerText=initials + "\n";
-            document.getElementById("scores").appendChild(newcontent);
-            */
+    document.getElementById("highScoreList").innerText = scoreReport;
+
+}
 
 
 var secondsLeft = 30;
@@ -112,7 +100,7 @@ function setTime() {
             score = secondsLeft;
             clearInterval(timerInterval);
             storeScore(score);
-                // displayScores();
+            displayScores();
         }
 
     }, 1000);
