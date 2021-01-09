@@ -87,12 +87,23 @@ function storeScore(myScore) {
 //This displays the top five scores. 
 function displayScores(){
     for(var i =0; i<5;i++){
-        scoreReport=scoreReport + "\n" + localStorage.getItem(playerScore[i].name);
+        scoreReport=scoreReport + "\n" + JSON.parse(localStorage.getItem(arrObj[i].name));
     };
     
     document.getElementById("highScoreList").innerText = scoreReport;
+    /*var restart = document.createElement("<button>");
+    restart.innerText="RESTART";
+    document.getElementById("main").appendChild(restart);
+
+    restart.addEventListener("click", function() {
+        document.reload();
+      });
+    */
+
 
 }
+
+
 
 //This is the timer element
 var secondsLeft = 30;
