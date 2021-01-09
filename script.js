@@ -68,7 +68,7 @@ function storeScore(myScore) {
     document.getElementById("3").style.display = "none";
     mainQuest.style.display = "none";
     timeEl.style.display = "none";
-    var initials = prompt("Please enter your initials to store your score and see if your score is one of the top five!");
+    var initials = prompt("Please enter your initials to store your score!");
     if (initials != null) {
         let playerScore = {
             name: initials,
@@ -86,19 +86,23 @@ function storeScore(myScore) {
 
 //This displays the top five scores. 
 function displayScores(){
+
+    /*
     for(var i =0; i<5;i++){
         scoreReport=scoreReport + "\n" + JSON.parse(localStorage.getItem(arrObj[i].name));
     };
-    
-    document.getElementById("highScoreList").innerText = scoreReport;
-    /*var restart = document.createElement("<button>");
+    */
+
+    document.getElementById("highScoreList").innerText = localStorage.getItem('playerScore');
+    //scoreReport;
+    var restart = document.createElement("BUTTON");
     restart.innerText="RESTART";
     document.getElementById("main").appendChild(restart);
 
     restart.addEventListener("click", function() {
-        document.reload();
+        location.reload();
       });
-    */
+    
 
 
 }
