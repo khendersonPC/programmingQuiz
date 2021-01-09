@@ -108,7 +108,7 @@ function setTime() {
         secondsLeft--;
         timeEl.textContent = secondsLeft + " seconds left";
 
-        if (secondsLeft === 0 || questionNum == 5) {
+        if (secondsLeft <= 0 || questionNum == 5) {
             score = secondsLeft;
             clearInterval(timerInterval);
             storeScore(score);
