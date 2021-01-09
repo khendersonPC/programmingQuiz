@@ -1,3 +1,4 @@
+//Declaration of most variables
 var timeEl = document.querySelector(".time");
 var mainEl = document.getElementById("main");
 var mainQuest = document.getElementById("questionBox");
@@ -28,10 +29,13 @@ document.getElementById("1").innerText = allQuest[0].ans1;
 document.getElementById("2").innerText = allQuest[0].ans2;
 document.getElementById("3").innerText = allQuest[0].ans3;
 
+//this sets a variable equal to which question the user clicks based on it's ID
 function setAnswer(clicked_id) {
     ansChoice = clicked_id;
 }
 
+//this checks to see if the ansChoice matches the correct response. If it does, it switches the question.
+//If you are wrong, seconds get subtracted from your score.
 function checkAns() {
     if (ansChoice == allQuest[questionNum].correct) {
         switchQues();
@@ -56,13 +60,15 @@ function switchQues() {
     */
 }
 
+//This hides everything, prompts the user to enter their initials. Then, it stores
+//their initials and their score (which is the seconds left). Oh- and sorts the list of scores before they are stored. 
 function storeScore(myScore) {
     document.getElementById("1").style.display = "none";
     document.getElementById("2").style.display = "none";
     document.getElementById("3").style.display = "none";
     mainQuest.style.display = "none";
     timeEl.style.display = "none";
-    var initials = prompt("Please enter your initials to store your score");
+    var initials = prompt("Please enter your initials to store your score and see if your score is one of the top five!");
     if (initials != null) {
         let playerScore = {
             name: initials,
@@ -73,22 +79,22 @@ function storeScore(myScore) {
         arrObj.sort(function(a,b){
             return b.high - a.high;
         });
-       // localStorage.setItem('initials', initials);
-       // localStorage.setItem("score", myScore);
+
         localStorage.setItem('playerScore', JSON.stringify(arrObj));
     }
 }
 
+//This displays the top five scores. 
 function displayScores(){
     for(var i =0; i<5;i++){
-        scoreReport=scoreReport + "\n" + localStorage.getItem(playerScore[i]);
+        scoreReport=scoreReport + "\n" + localStorage.getItem(playerScore[i].name);
     };
     
     document.getElementById("highScoreList").innerText = scoreReport;
 
 }
 
-
+//This is the timer element
 var secondsLeft = 30;
 
 function setTime() {
