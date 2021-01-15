@@ -6,6 +6,7 @@ var ansChoice = "";
 var questionNum = 0;
 let arrObj = JSON.parse(localStorage.getItem('playerScore')) || [];
 let scoreReport="";
+let playerScore;
 
 // Question objects
 var q1 = { tex: "Inside which HTML element do we put the JavaScript?", ans1: "<scripting>", ans2: "<javascript>", ans3: "<script>", correct: "3" };
@@ -68,7 +69,7 @@ function storeScore(myScore) {
     document.getElementById("3").style.display = "none";
     mainQuest.style.display = "none";
     timeEl.style.display = "none";
-    var initials = prompt("Please enter your initials to store your score and see if you are in the top 5!");
+    var initials = prompt("Please enter your initials to store your score.");
     if (initials != null) {
         let playerScore = {
             name: initials,
@@ -81,7 +82,9 @@ function storeScore(myScore) {
         });
 
         localStorage.setItem('playerScore', JSON.stringify(arrObj));
+
     }
+    return playerScore;
 }
 
 //This displays the top five scores. 
@@ -90,10 +93,17 @@ function displayScores(){
     
     var arr2 = JSON.parse(localStorage.getItem('playerScore'));
     
-    for(var i =0; i<5;i++){
-        scoreReport=scoreReport + ("\n" + arr2[i].name + "\t" + arr2[i].high);
-    };
+    if(arr2.length>5){
+        for(var i =0; i<3;i++){
+            scoreReport=scoreReport + ("\n" + arr2[i].name + "\t" + arr2[i].high);
+        };
+    }
+    else{
+        scoreReport=JSON.stringify(arr2);
+    }   
     
+    //document.getElementById("highScoreList").textContent(scoreReport);
+
     document.getElementById("highScoreList").innerText =scoreReport;
 
     //this works too-->document.getElementById("highScoreList").innerText = localStorage.getItem('playerScore');
